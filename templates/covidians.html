@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel ="stylesheet" href="{% static 'color_pink.css' %}">
+</head>
+<body>
+    <a href="{% url 'create-user' %}">new</a>
+    {% if covidians|length == 0 %}
+        <h1>Our database is empty </h1>
+    {% else %}
+        <h2> This is the COVID-19 report application. We have {{ covidians| length }} active users in our database.</h2>
+    {% for covidian in covidians %}
+        <h3> {{ covidian.name }}</h3>
+        <p> {{ covidian.email }}</p>
+
+
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
