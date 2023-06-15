@@ -60,7 +60,7 @@ def dashboard(request):
     #    print(elements)
 
     # points = Point.objects.all()
-    print('xyz')
+    #print('xyz')
     queryset = Covidians.objects.values('user_created_at').annotate(count=Count('id')).order_by('user_created_at')
     x_date = [point['user_created_at'] for point in queryset]
     y_date = [point['count'] for point in queryset]
