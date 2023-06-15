@@ -7,41 +7,47 @@ from .models import Covidians
 # Create your tests here.
 
 User = get_user_model()
-class FirstTestCase(TestCase):
 
-    def test_success(self):
-        """ Test success assertTrue if passed gives True. example: assert 1 == 1 if the test does not pass a message will be displayed """
-        self.assertTrue(True)
-
-
-
-    def test_fail(self):
-        self.assertTrue(False)
-
-
-
-    def test_error(self):
-        """ Test with no assertion. An exception appears"""
-        raise ValueError("Error has been raised")
-
-
-class CovidiansTestCase(TestCase):
-    """ Test for Covidians model """
-
-    def test_if_info_about_users_in_covid_app_appears(self):
-        """ creating a test-user"""
-        user = User.objects.create_user(username="test123", email="test123@gmail.com", password="secret")
-        response = self.client.force_login(user) # user must be logged-in
 
 
 class CovidiansModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Covidians.objects.create(name='tester_001', email='tester', tested_positive='yes', shots_taken='1')
+        Covidians.objects.create(id=1,name='tester_001', email='tester', tested_positive='yes', shots_taken='1')
+
+    def test_name_label(self):
+        covidians = Covidians.objects.get(id=1)
+        field_label = covidians._meta.get_field('name').verbose_name
+        self.assertEqual(field_label, 'name')
+
+    def test_name_max_lenght(self):
+        covidians = Covidians.objects.get(id=1)
+        max_length = covidians._meta.get_field('name').max_length
+        self.assertEqual(max_length, 64)
 
 
 
+
+
+
+
+
+"""
+
+class Covidians(models.Model):
+    name = models.CharField(max_length=64, null=True, blank=False)
+    email = models.CharField(max_length=64, null=True, blank=False, unique=True)
+    tested_positive = models.CharField(max_length=3, null=True, blank=False, default='YES')
+    shots_taken = models.PositiveIntegerField(default=0, blank=False)
+    #how_got_virus = models.TextField(default="") OPTIONAL!!!
+    user_created_at = models.DateField(default=timezone.now) #more info DateField.auto_now_add OPTIONAL!!!
+    user_photo = models.ImageField(upload_to="my_media", null=True, blank=True) #OPTIONAL!!!
+
+
+    def __str__(self):          #w admin userów wyswietli mi po danych jako str
+        return f"{self.id, self.name, self.email, self.tested_positive, self.shots_taken, self.user_photo}"
+"""
 
 
 
