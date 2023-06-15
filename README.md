@@ -58,5 +58,9 @@
   </details>
 
 * [Application view](#application-view)
-
+    <details>
+   <summary>Click here to see the Application view<b>Project</b>!</summary>
+   <b>Covid-19 report application</b> graph of the number of infections as a function of time.
+    https://github.com/AlexArciszewski/SDA_Project/assets/102918054/b5d7282b-4810-4694-ab98-c0545f78e4d4
+  </details>
 
